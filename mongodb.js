@@ -1,11 +1,13 @@
 // CRUD
 
-const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient
-const ObjectID = mongodb.ObjectID
+const { MongoClient, ObjectID } = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
+
+const id = new ObjectID()
+console.log(id)
+console.log(id.getTimestamp())
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
     if (error) {
@@ -15,8 +17,8 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     const db = client.db(databaseName)
 
     // db.collection('users').insertOne({
-    //     name: 'Divyansh',
-    //     Age: 21
+    //     name: 'Vikram',
+    //     Age: 26
     // }, (error, result) => {
     //     if (error) {
     //         return console.log('Unable to connect User')
@@ -25,39 +27,14 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
     //     console.log(result.ops)
     // })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Jen',
-    //         age:20
-    //     }, {
-    //         name: 'Rohan',
-    //         age:26
-    //     }
-    // ], (error, result) => {
-    //     if (error) {
-    //         return console.log('Unable to insert documents')
-    //     }
+    db.collection('users').findOne({ name: 'Divyansh' }, (error, user) => {
+        if (error) {
+            return console.log('Unable to fetch')
+        }
 
-    //     console.log(result.ops)
-    // })
+        console.log(user)
+    })
 
-    // db.collection('tasks').insertMany([
-    //     {
-    //         description: 'House Clean',
-    //         completed: false
-    //     }, {
-    //         description: 'Do Upwork',
-    //         completed: true
-    //     }, {
-    //         description: 'study',
-    //         completed: true
-    //     }
-    // ], (error, result) => {
-    //     if (error) {
-    //          return console.log('Unable to insert documents')
-    //       }
-        
-    //      console.log(result.ops)
-    // })
+   
 })
 

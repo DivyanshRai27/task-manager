@@ -82,13 +82,13 @@ const task = new Task({
             console.log(error)
         })
 
-const task = new Task({
-        description: 'Do development',
-        competed: true
-    })
+// const task = new Task({
+//         description: 'Do development',
+//         competed: true
+//     })
 
-    task.save().then(() => {
-            console.log(task)
-        }).catch((error) => {
-            console.log(error)
-        })
+//     task.save().then(() => {
+//             console.log(task)
+//         }).catch((error) => {
+//             console.log(error)
+//         })

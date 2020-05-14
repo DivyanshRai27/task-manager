@@ -50,13 +50,13 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.virtual('tasks', {
-    ref: 'task',
+    ref: 'Task',
     localField: '_id',
     foreignField: 'owner'
 })
 
 userSchema.methods.toJSON = function () {
-    const user = this 
+    const user = this
     const userObject = user.toObject()
 
     delete userObject.password
@@ -67,7 +67,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, 'thisisnewnodecourse')
+    const token = jwt.sign({ _id: user._id.toString() }, 'thisismynewcourse')
 
     user.tokens = user.tokens.concat({ token })
     await user.save()
@@ -78,7 +78,7 @@ userSchema.methods.generateAuthToken = async function () {
 userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({ email })
 
-    if(!user){
+    if (!user) {
         throw new Error('Unable to login')
     }
 
@@ -91,7 +91,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
-// Hash the password before saving 
+// Hash the plain text password before saving
 userSchema.pre('save', async function (next) {
     const user = this
 
